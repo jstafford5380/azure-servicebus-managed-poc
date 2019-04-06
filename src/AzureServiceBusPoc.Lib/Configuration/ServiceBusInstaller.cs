@@ -27,7 +27,12 @@ namespace AzureServiceBusPoc.Lib.Configuration
 
             var bus = services.BuildServiceProvider().GetRequiredService<IServiceBus>();
             var subscriptionBuilder = new SubscriptionBuilder(bus);
+
+            if(config.CanReceive)
+                subscriptionBuilder.ConsumeQueue(config.EndpointName);
+
             configBuilder.StartSubscriptions(subscriptionBuilder);
+
             var container = subscriptionBuilder.Build();
             services.AddSingleton(container);
         }

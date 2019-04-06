@@ -30,7 +30,6 @@ namespace AzureServiceBusPoc.App1
                     {
                         builder.ConsumeTopic("test-foo", "Test-Poc");
                         builder.ConsumeTopic("test-bar", "Test-Poc");
-                        builder.ConsumeQueue(Configuration["AzureServiceBus:EndpointName"]);
                     });
 
                     if (Environment.IsEnvironment("Local"))

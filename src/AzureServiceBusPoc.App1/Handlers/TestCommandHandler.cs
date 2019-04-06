@@ -8,13 +8,17 @@ using AzureServiceBusPoc.Messaging;
 
 namespace AzureServiceBusPoc.App1.Handlers
 {
-    public class TestCommandHandler : IHandleMessages<TestCommand>, IHandleMessages<TestResponse>, IHandleMessages<RewiredCommand>
+    public class TestCommandHandler : 
+        IHandleMessages<TestCommand>, 
+        IHandleMessages<TestResponse>, 
+        IHandleMessages<RewiredCommand>, 
+        IHandleMessages<TestEvent>
     {
         public async Task Handle(TestCommand message, IMessageContext context, CancellationToken cancellationToken)
         {
             OutputTrace(message.Message, context);
             var reply = new TestResponse {Message = "I'm a reply!"};
-            await context.SendLocalAsync(reply);
+            await context.SendAsync(reply, context.Source);
         }
 
         public Task Handle(TestResponse message, IMessageContext context, CancellationToken cancellationToken)
@@ -34,19 +38,16 @@ namespace AzureServiceBusPoc.App1.Handlers
         {
             Trace.WriteLine($"Received: {context.MessageId}\n\tIn Response To: {context.CorrelationId}\n\tStartedConversation: {context.IsConversationStarter}\n\tConversation: {context.ConversationId}\n\t{message}");
         }
+
+        public Task Handle(TestEvent message, IMessageContext context, CancellationToken cancellationToken)
+        {
+            OutputTrace(message.Message, context);
+            return Task.CompletedTask;
+        }
     }
 
     public class TestResponse : ICommand
     {
         public string Message { get; set; }
-    }
-
-    public class TestEventHandler : IHandleMessages<TestEvent>
-    {
-        public Task Handle(TestEvent message, IMessageContext context, CancellationToken cancellationToken)
-        {
-            Trace.WriteLine(message.Message);
-            return Task.CompletedTask;
-        }
     }
 }

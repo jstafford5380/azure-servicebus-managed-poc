@@ -6,4 +6,11 @@
         Queue,
         Topic
     }
+
+    public enum MessageIntent
+    {
+        Unspecified,
+        Command,
+        Event
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using AzureServiceBusPoc.Lib.Core;
 using Microsoft.Extensions.Configuration;
 
 namespace AzureServiceBusPoc.Lib.Configuration
@@ -96,10 +97,5 @@ namespace AzureServiceBusPoc.Lib.Configuration
         private bool IsReceiver => _receiveOnly || !_receiveOnly && !_sendOnly;
 
         private bool IsSender => _sendOnly || !_sendOnly && !_receiveOnly;
-    }
-
-    public interface IHandleTypeResolver
-    {
-        Type UseTypeFor(string enclosedMessageType);
     }
 }

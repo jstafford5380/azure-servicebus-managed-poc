@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AzureServiceBusPoc.Lib.Configuration;
 using AzureServiceBusPoc.Lib.Shared;
@@ -31,31 +32,32 @@ namespace AzureServiceBusPoc.Lib.Core
         public async Task SendAsync<T>(T message, string destination, SendOptions sendOptions = null)
             where T : ICommand
         {
-            EnsureCanSend();
-            var client = new QueueClient(_connection, destination, ReceiveMode.PeekLock, _retryPolicy);
             var messageBody = CreateNewMessage(message);
-            await client.SendAsync(messageBody);
+            await SendMessageAsync(messageBody, destination, ChannelType.Queue);
         }
 
         public async Task PublishAsync<T>(T message, string topic, SendOptions options = null)
             where T : IEvent
         {
-            EnsureCanSend();
-            var client = new TopicClient(_connection, topic, _retryPolicy);
             var messageBody = CreateNewMessage(message);
-            await client.SendAsync(messageBody);
+            await SendMessageAsync(messageBody, topic, ChannelType.Topic);
         }
 
         public Task SendLocalAsync<T>(T message) where T : ICommand
         {
-            var client = new QueueClient(_connection, Configuration.EndpointName, ReceiveMode.PeekLock, _retryPolicy);
             var messageBody = CreateNewMessage(message);
-            return client.SendAsync(messageBody);
+            return SendMessageAsync(messageBody, Configuration.EndpointName, ChannelType.Queue);
         }
 
         public Task SendMessageAsync(Message message, string destination, ChannelType type)
         {
             EnsureCanSend();
+            message.UserProperties[HeaderTypes.MessageIntent] = new Dictionary<ChannelType, MessageIntent>
+            {
+                [ChannelType.Topic] = MessageIntent.Event,
+                [ChannelType.Queue] = MessageIntent.Command
+            }[type].ToString();
+
             var work = Task.CompletedTask;
             switch (type)
             {

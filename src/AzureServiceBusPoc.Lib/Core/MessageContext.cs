@@ -34,22 +34,20 @@ namespace AzureServiceBusPoc.Lib.Core
         public Task SendAsync<T>(T message, string destination, SendOptions options = null)
             where T : ICommand
         {
-            EnsureCanSend();
             var outgoingMessage = PrepareMessage(message, options);
             return _serviceBus.SendMessageAsync(outgoingMessage, destination, ChannelType.Queue);
-        }
-
-        public Task PublishAsync<T>(T message, string destination, SendOptions options = null)
-            where T : IEvent
-        {
-            EnsureCanSend();
-            var outgoingMessage = PrepareMessage(message, options);
-            return _serviceBus.SendMessageAsync(outgoingMessage, destination, ChannelType.Topic);
         }
 
         public Task SendLocalAsync<T>(T message) where T : ICommand
         {
             return SendAsync(message, _serviceBus.Configuration.EndpointName);
+        }
+
+        public Task PublishAsync<T>(T message, string destination, SendOptions options = null)
+            where T : IEvent
+        {
+            var outgoingMessage = PrepareMessage(message, options);
+            return _serviceBus.SendMessageAsync(outgoingMessage, destination, ChannelType.Topic);
         }
 
         private Message PrepareMessage<T>(T message, SendOptions options)
@@ -81,12 +79,6 @@ namespace AzureServiceBusPoc.Lib.Core
             newMessage.UserProperties[HeaderTypes.EnclosedType] = message.GetType().FullName;
 
             return newMessage;
-        }
-
-        private void EnsureCanSend()
-        {
-            if (!_serviceBus.Configuration.CanSend)
-                throw new InvalidOperationException("This client is not configured to send.");
         }
     }
 }

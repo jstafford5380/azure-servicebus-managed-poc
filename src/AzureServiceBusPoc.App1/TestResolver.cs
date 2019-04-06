@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AzureServiceBusPoc.Lib.Configuration;
+using AzureServiceBusPoc.Lib.Core;
 using AzureServiceBusPoc.Messaging;
 
 namespace AzureServiceBusPoc.App1
