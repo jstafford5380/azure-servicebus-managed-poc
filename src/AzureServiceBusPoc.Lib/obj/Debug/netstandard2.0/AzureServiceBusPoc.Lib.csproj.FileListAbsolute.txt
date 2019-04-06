@@ -1,9 +1,0 @@
-C:\Users\jstaf\source\pocs\AzureServiceBusPoc\AzureServiceBusPoc.Lib\obj\Debug\netstandard2.0\AzureServiceBusPoc.Lib.csprojAssemblyReference.cache
-C:\Users\jstaf\source\pocs\AzureServiceBusPoc\AzureServiceBusPoc.Lib\obj\Debug\netstandard2.0\AzureServiceBusPoc.Lib.csproj.CoreCompileInputs.cache
-C:\Users\jstaf\source\pocs\AzureServiceBusPoc\AzureServiceBusPoc.Lib\obj\Debug\netstandard2.0\AzureServiceBusPoc.Lib.AssemblyInfoInputs.cache
-C:\Users\jstaf\source\pocs\AzureServiceBusPoc\AzureServiceBusPoc.Lib\obj\Debug\netstandard2.0\AzureServiceBusPoc.Lib.AssemblyInfo.cs
-C:\Users\jstaf\source\pocs\AzureServiceBusPoc\AzureServiceBusPoc.Lib\bin\Debug\netstandard2.0\AzureServiceBusPoc.Lib.deps.json
-C:\Users\jstaf\source\pocs\AzureServiceBusPoc\AzureServiceBusPoc.Lib\bin\Debug\netstandard2.0\AzureServiceBusPoc.Lib.dll
-C:\Users\jstaf\source\pocs\AzureServiceBusPoc\AzureServiceBusPoc.Lib\bin\Debug\netstandard2.0\AzureServiceBusPoc.Lib.pdb
-C:\Users\jstaf\source\pocs\AzureServiceBusPoc\AzureServiceBusPoc.Lib\obj\Debug\netstandard2.0\AzureServiceBusPoc.Lib.dll
-C:\Users\jstaf\source\pocs\AzureServiceBusPoc\AzureServiceBusPoc.Lib\obj\Debug\netstandard2.0\AzureServiceBusPoc.Lib.pdb
