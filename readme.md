@@ -8,6 +8,9 @@
     - **MessageId**: The unique ID of the message itself
     - **CorrelationId**: The MessageID of the message that caused "this" message. For example, if MessageB is in response to MessageA, then Message A's MessageId will be MessageB's CorrelationID
     - **ConversationId**: The ID of all messages that are part of the same transaction.
+
+![Message IDs](cakTcD2Pl0.png){:height="50%" width="50%"}
+
 - Handle incoming messages by convention. To deal with an incoming message (Queue or Topic), simply implement the interface `IHandleMessages<T>` where T is the type of the incoming message. Handlers are dependency injected.
 - To deal with scenarios where the original message type is not available to the consumer assembly (i.e. did not originate from, or message is not in a shared library), allow the means to manually resolve the message type to another message type.
 - Headers that are added via `SendOptions` are copied to every message in the conversation. Use this add additional metadata between messages that don't really fit into the message.
