@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                powershell 'dotnet build src -c Release'
+                pwsh 'dotnet build src -c Release'
             }
         }
     }
