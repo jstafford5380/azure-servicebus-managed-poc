@@ -14,10 +14,14 @@ pipeline {
                     }
                 }
                 stage('publish artifacts') {
-                    echo 'MOCK: publish binaries'                
+                    steps {
+                        echo 'MOCK: publish binaries'    
+                    }            
                 }
                 stage('build docker container') {
-                    echo 'MOCK: build docker container'
+                    steps {
+                        echo 'MOCK: build docker container'
+                    }
                 }
             }
         }
