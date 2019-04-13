@@ -16,8 +16,7 @@ namespace AzureServiceBusPoc.Lib.Core
         private readonly RetryPolicy _retryPolicy;
         private readonly IServiceProvider _services;
         private ClientEntity _client;
-        private ServiceBusConfiguration _busConfiguration;
-        private MessageHandlerOptions _handlerOptions;
+        private readonly MessageHandlerOptions _handlerOptions;
 
         public AzureServiceBusConsumer(
             ServiceBusConnection connection, 
@@ -27,10 +26,10 @@ namespace AzureServiceBusPoc.Lib.Core
             _connection = connection;
             _retryPolicy = retryPolicy;
             _services = services;
-            _busConfiguration = _services.GetRequiredService<IServiceBus>().Configuration;
+            var busConfiguration = _services.GetRequiredService<IServiceBus>().Configuration;
             _handlerOptions = new MessageHandlerOptions(ExceptionReceivedHandler)
             {
-                MaxConcurrentCalls = _busConfiguration.MaxConcurrency,
+                MaxConcurrentCalls = busConfiguration.MaxConcurrency,
                 AutoComplete = true
             };
         }
