@@ -6,8 +6,16 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'pwsh build.ps'
+                pwshFile('build.ps1')
             }
         }
     }
+}
+
+def pwshFile(script) {
+    sh 'pwsh -File ${script}'
+}
+
+def pwshScript(script) {
+    sh 'pwsh -Command ${script}'
 }
