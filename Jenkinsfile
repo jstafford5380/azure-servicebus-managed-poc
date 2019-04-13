@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                dotnet build src
+                sh 'dotnet build src -c Release'
             }
         }
     }
