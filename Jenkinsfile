@@ -13,9 +13,11 @@ pipeline {
 }
 
 def pwshFile(script) {
-    sh 'pwsh -File ${script}'
+    def command = "pwsh -File ${script}"
+    sh command
 }
 
 def pwshScript(script) {
-    sh 'pwsh -Command ${script}'
+    def command = "pwsh -Command ${script}"
+    sh command
 }
