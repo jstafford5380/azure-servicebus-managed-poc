@@ -15,7 +15,7 @@ pipeline {
                 }
                 stage('publish artifacts') {
                     echo 'MOCK: publish binaries'                
-                },
+                }
                 stage('build docker container') {
                     echo 'MOCK: build docker container'
                 }
@@ -27,7 +27,7 @@ pipeline {
                     steps {
                         echo 'MOCK: upload artifacts'
                     }
-                },
+                }
                 stage('Push docker image') {
                     steps {
                         echo 'MOCK: push docker image'
